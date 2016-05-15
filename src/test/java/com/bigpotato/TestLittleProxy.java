@@ -9,11 +9,15 @@ import org.littleshoot.proxy.HttpFiltersAdapter;
 import org.littleshoot.proxy.HttpFiltersSourceAdapter;
 import org.littleshoot.proxy.HttpProxyServer;
 import org.littleshoot.proxy.impl.DefaultHttpProxyServer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Created by hjy on 5/15/16.
  */
 public class TestLittleProxy {
+    private final static Logger logger = LoggerFactory.getLogger(TestLittleProxy.class);
+
     public static void main(String []args) {
         HttpProxyServer server =
                 DefaultHttpProxyServer.bootstrap()
@@ -24,14 +28,14 @@ public class TestLittleProxy {
                                     @Override
                                     public HttpResponse clientToProxyRequest(HttpObject httpObject) {
                                         // TODO: implement your filtering here
-                                        System.out.println("clientToProxyRequest:" + httpObject.toString());
+                                        logger.info("#TestLittleProxy clientToProxyRequest#httpObject = {}", httpObject.toString());
                                         return null;
                                     }
 
                                     @Override
                                     public HttpObject serverToProxyResponse(HttpObject httpObject) {
                                         // TODO: implement your filtering here
-                                        System.out.println("serverToProxyResponse:" + httpObject.toString());
+                                        logger.info("#TestLittleProxy serverToProxyResponse#httpObject = {}", httpObject.toString());
                                         return httpObject;
                                     }
                                 };
